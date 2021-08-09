@@ -4,10 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run development",
+    "development": "webpack serve --progress --config webpack.config.development.js",
+    "build": "webpack --progress --config webpack.config.build.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "boilerplate",
+    "webpack",
+    "gsap",
+    "javascript",
+    "handlebars"
+  ],
+  "author": "Lesley Cheung",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -20,8 +28,28 @@
     "jest": "^27.0.6",
     "knex": "^0.21.20",
     "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "node-sass": "^6.0.1",
     "ogl": "0.0.73",
     "pg": "^8.7.1",
     "supertest": "^6.1.4"
+  },
+  "devDependencies": {
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.2.0",
+    "eslint": "^7.32.0",
+    "file-loader": "^6.2.0",
+    "glslify-loader": "^2.0.0",
+    "handlebars-loader": "^1.7.1",
+    "mini-css-extract-plugin": "^2.2.0",
+    "postcss-loader": "^6.1.1",
+    "raw-loader": "^4.0.2",
+    "sass-loader": "^12.1.0",
+    "webpack": "^5.49.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.8.0"
   }
 }
