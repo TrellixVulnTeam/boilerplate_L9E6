@@ -15,7 +15,7 @@ app.get("/about", (request, response) => {
 app.get("/collections", (request, response) => {
   response.render("pages/collections", sampleData);
 });
-app.get("/details", (request, response) => {
+app.get("/detail/:uid", (request, response) => {
   response.render("pages/detail", sampleData);
 });
 

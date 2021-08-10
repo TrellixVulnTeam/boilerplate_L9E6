@@ -1,4 +1,7 @@
 extends ../template.pug
 
-block content
-    h1=title
+block variables 
+    - var template = "about"
+
+block body 
+    h1.collections__title #{template}

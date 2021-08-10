@@ -36,6 +36,8 @@
     "node-sass": "^6.0.1",
     "ogl": "0.0.73",
     "pg": "^8.7.1",
+    "prismic-dom": "^2.2.6",
+    "prismic-javascript": "^3.0.2",
     "pug": "^3.0.2",
     "request": "^2.88.2",
     "staticify": "^5.0.0",

@@ -17,6 +17,15 @@ Babel - js compiler
 App:
 Backend: config for express, database, routes
 
+Prismic -
+
+- Think about the page type
+-
+
+## Questions
+
+- Wouldn't it be easier just to put everything in a frontend and backend folder, why does he put everything in app lol
+
 # Technologies
 
 - Webpack

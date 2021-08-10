@@ -43,6 +43,11 @@ html(lang="en")
             include ./partials/preloader.pug
             include ./partials/navigation.pug
 
-            block content
+            //- you can create variables in other pages
+            //- e.g., var template = "about"
+            
+            .content#content(data-template=template)
+            block variables
+            block body
                 
              
