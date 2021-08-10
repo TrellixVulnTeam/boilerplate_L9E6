@@ -2,10 +2,12 @@ const express = require("express");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+
 const errorHandler = require("errorhandler");
 const path = require("path");
+// static handler
 const staticify = require("staticify")(
-  path.join(__dirname, "public")
+  path.join(__dirname, "../", "public")
 );
 
 module.exports = (() => {
@@ -13,7 +15,7 @@ module.exports = (() => {
 
   app.set("port", 3000);
 
-  app.set("views", path.join(__dirname, "views"));
+  app.set("views", path.join(__dirname, "../", "views"));
   app.set("view engine", "pug");
 
   app.use(logger("dev"));
@@ -23,7 +25,9 @@ module.exports = (() => {
 
   app.use(methodOverride());
 
-  app.use(express.static(path.join(__dirname, "public")));
+  app.use(
+    express.static(path.join(__dirname, "../", "public"))
+  );
 
   app.use(errorHandler());
 

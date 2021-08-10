@@ -12,6 +12,11 @@ Make development more straightforward
 
 Babel - js compiler
 
+## How it's organized
+
+App:
+Backend: config for express, database, routes
+
 # Technologies
 
 - Webpack
