@@ -80,38 +80,41 @@ const sampleData = {
 //       console.log("error", error);
 //     });
 // });
-app.get("/about", (request, response) => {
-  connectToDB(request).then(function (api) {
-    api
-      .query(
-        Prismic.Predicates.any("document.type", [
-          "meta",
-          "about",
-        ])
-      )
-      .then(function (prismicData) {
-        const { results } = prismicData;
-        const [meta, about] = results;
-        let galleryImages = about.data.body[0].items;
-        console.log("about body", about.data.body);
-        let highlight = about.data.body[9];
-        console.log(highlight.items);
-        response.render("pages/about", {
-          meta,
-          about,
-          galleryImages,
-        });
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  });
+app.get("/about", async (request, response) => {
+  const api = await connectToDB(request);
+  const meta = await api.getSingle("meta");
+  const about = await api.getSingle("about");
+  let galleryImages = about.data.body[0].items;
+  response
+    .render("pages/about", {
+      meta,
+      about,
+      galleryImages,
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
 });
 app.get("/collections", (request, response) => {
   response.render("pages/collections", sampleData);
 });
-app.get("/detail/:uid", (request, response) => {
-  response.render("pages/detail", sampleData);
+app.get("/detail/:uid", async (request, response) => {
+  const api = await connectToDB(request);
+  const meta = await api.getSingle("meta");
+  const product = await api.getByUID(
+    "product",
+    request.params.uid
+  );
+
+  console.log(product);
+  response
+    .render("pages/detail", {
+      meta,
+      product,
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
 });
 
 app.get("/", (request, response) => {
