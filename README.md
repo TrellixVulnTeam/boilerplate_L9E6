@@ -2,6 +2,10 @@
 
 Make development more straightforward
 
+- Create UI
+- Create Prismic
+- Render everything in pug
+
 # To start
 
 - Create .env file

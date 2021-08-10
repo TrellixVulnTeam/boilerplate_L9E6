@@ -33,6 +33,7 @@ app.use(function (req, res, next) {
     linkResolver: linkResolver,
   };
   // add PrismicDOM in locals to access them in templates.
+  // you can call PrismicDOM in pug files
   res.locals.PrismicDOM = PrismicDOM;
   next();
 });
@@ -49,34 +50,36 @@ const sampleData = {
 // app.use
 
 // get meta
-async function getMetaAndAbout(request) {
-  let data = await connectToDB(request);
-  let results = await data.query(
-    Prismic.Predicates.any("document.type", [
-      "meta",
-      "about",
-    ])
-  );
-  return results;
-}
-app.get("/test", (request, response) => {
-  return getMetaAndAbout(request)
-    .then(function (data) {
-      console.log("HELLO");
-      return data;
-    })
-    .then(function (prismicData) {
-      const { results } = prismicData;
-      const [meta, about] = results;
-      response.render("pages/about", {
-        meta,
-        about,
-      });
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
-});
+// #TODO: refactor this later
+// async function getMetaAndAbout(request) {
+//   let data = await connectToDB(request);
+//   let results = await data.query(
+//     Prismic.Predicates.any("document.type", [
+//       "meta",
+//       "about",
+//     ])
+//   );
+//   return results;
+// }
+// app.get("/test", (request, response) => {
+//   return getMetaAndAbout(request)
+//     .then(function (data) {
+//       console.log("HELLO");
+//       return data;
+//     })
+//     .then(function (prismicData) {
+//       const { results } = prismicData;
+//       const [meta, about] = results;
+
+//       response.render("pages/about", {
+//         meta,
+//         about,
+//       });
+//     })
+//     .catch((error) => {
+//       console.log("error", error);
+//     });
+// });
 app.get("/about", (request, response) => {
   connectToDB(request).then(function (api) {
     api
@@ -86,18 +89,17 @@ app.get("/about", (request, response) => {
           "about",
         ])
       )
-      .then(function (data) {
-        console.log("HELLO");
-
-        return data;
-      })
       .then(function (prismicData) {
         const { results } = prismicData;
         const [meta, about] = results;
-        console.log("meta", meta, "about", about);
+        let galleryImages = about.data.body[0].items;
+        console.log("about body", about.data.body);
+        let highlight = about.data.body[9];
+        console.log(highlight.items);
         response.render("pages/about", {
           meta,
           about,
+          galleryImages,
         });
       })
       .catch((error) => {
