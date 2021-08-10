@@ -6,14 +6,6 @@ var PrismicDOM = require("prismic-dom");
 const ENDPOINT = process.env.PRISMIC_ENDPOINT;
 const ACCESS_TOKEN = process.env.PRISMIC_ACCESS_TOKEN;
 
-// Connecting to Database
-function connectToDB(req) {
-  return Prismic.getApi(ENDPOINT, {
-    accessToken: ACCESS_TOKEN,
-    req: req,
-  });
-}
-
 // Link Resolver
 function linkResolver(doc) {
   // Define the url depending on the document type
@@ -25,6 +17,13 @@ function linkResolver(doc) {
 
   // Default to homepage
   return "/";
+}
+// Connecting to Database
+function connectToDB(req) {
+  return Prismic.getApi(ENDPOINT, {
+    accessToken: ACCESS_TOKEN,
+    req: req,
+  });
 }
 
 // Middleware to inject prismic context
@@ -47,6 +46,37 @@ const sampleData = {
   },
 };
 
+// app.use
+
+// get meta
+async function getMetaAndAbout(request) {
+  let data = await connectToDB(request);
+  let results = await data.query(
+    Prismic.Predicates.any("document.type", [
+      "meta",
+      "about",
+    ])
+  );
+  return results;
+}
+app.get("/test", (request, response) => {
+  return getMetaAndAbout(request)
+    .then(function (data) {
+      console.log("HELLO");
+      return data;
+    })
+    .then(function (prismicData) {
+      const { results } = prismicData;
+      const [meta, about] = results;
+      response.render("pages/about", {
+        meta,
+        about,
+      });
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
+});
 app.get("/about", (request, response) => {
   connectToDB(request).then(function (api) {
     api
@@ -56,11 +86,19 @@ app.get("/about", (request, response) => {
           "about",
         ])
       )
+      .then(function (data) {
+        console.log("HELLO");
+
+        return data;
+      })
       .then(function (prismicData) {
-        console.log("results", prismicData.results[0]);
         const { results } = prismicData;
         const [meta, about] = results;
-        response.render("pages/about", { meta, about });
+        console.log("meta", meta, "about", about);
+        response.render("pages/about", {
+          meta,
+          about,
+        });
       })
       .catch((error) => {
         console.log("error", error);
