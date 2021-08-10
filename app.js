@@ -1,10 +1,11 @@
-const express = require("express");
-const app = express();
+require("dotenv").config();
+
+const app = require("./config");
 
 const PORT = 3000;
 
 app.get("/", (request, response) => {
-  response.send("hello");
+  response.render("index");
 });
 
 app.listen(PORT, () => {

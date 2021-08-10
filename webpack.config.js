@@ -78,6 +78,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.pug$/,
+        use: ["pug-loader"],
+      },
+      {
         test: /\.handlebars$/,
         loader: "handlebars-loader",
       },
