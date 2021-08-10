@@ -11,6 +11,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 // fetch CSS files from JS files and output CSS file
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+
 // going to check if we are in development
 const IS_DEVELOPMENT = (process.env.NODE_ENV = "dev");
 
@@ -58,6 +60,18 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css",
+    }),
+    new ImageMinimizerPlugin({
+      minimizerOptions: {
+        // Lossless optimization with custom option
+        // Feel free to experiment with options for better result for you
+        plugins: [
+          ["gifsicle", { interlaced: true }],
+          ["jpegtran", { progressive: true }],
+          // see how much quality you want
+          ["optipng", { optimizationLevel: 5 }],
+        ],
+      },
     }),
   ],
 
@@ -110,11 +124,20 @@ module.exports = {
         // import image from './assets/image/1.png
         loader: "file-loader",
         options: {
-          // 
+          // saves it into assets folder into public
+          outputPath: "assets",
           name(file) {
-            return "[hash].[ext]";
+            return "[name].[ext]";
           },
         },
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg|webp)$/i,
+        use: [
+          {
+            loader: ImageMinimizerPlugin.loader,
+          },
+        ],
       },
       {
         test: /\.(glsl|frag|vert)$/,

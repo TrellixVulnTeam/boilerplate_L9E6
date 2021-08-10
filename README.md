@@ -11,3 +11,9 @@ Make development more straightforward
 ```
 
 Babel - js compiler
+
+# Technologies
+
+- Webpack
+- Pug
+- Prismic

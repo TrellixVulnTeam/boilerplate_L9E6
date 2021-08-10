@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run development",
-    "development": "webpack serve --progress --config webpack.config.development.js",
-    "build": "webpack --progress --config webpack.config.build.js"
+    "frontend:development": "webpack serve --progress --config webpack.config.development.js",
+    "frontend:build": "webpack --progress --config webpack.config.build.js",
+    "backend:development": "nodemon app.js",
+    "backend:build": "node app.js"
   },
   "keywords": [
     "boilerplate",
@@ -22,6 +24,7 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+    "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.3",
     "gsap": "^3.7.1",
@@ -32,7 +35,11 @@
     "node-sass": "^6.0.1",
     "ogl": "0.0.73",
     "pg": "^8.7.1",
-    "supertest": "^6.1.4"
+    "pug": "^3.0.2",
+    "request": "^2.88.2",
+    "staticify": "^5.0.0",
+    "supertest": "^6.1.4",
+    "ua-parser-js": "^0.7.28"
   },
   "devDependencies": {
     "babel-loader": "^8.2.2",
@@ -40,9 +47,18 @@
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.2.0",
     "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.24.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-standard": "^5.0.0",
     "file-loader": "^6.2.0",
     "glslify-loader": "^2.0.0",
     "handlebars-loader": "^1.7.1",
+    "image-minimizer-webpack-plugin": "^2.2.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-optipng": "^8.0.0",
     "mini-css-extract-plugin": "^2.2.0",
     "postcss-loader": "^6.1.1",
     "raw-loader": "^4.0.2",
