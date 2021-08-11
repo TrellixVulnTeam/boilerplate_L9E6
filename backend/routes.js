@@ -35,73 +35,66 @@ app.use(function (req, res, next) {
   // add PrismicDOM in locals to access them in templates.
   // you can call PrismicDOM in pug files
   res.locals.PrismicDOM = PrismicDOM;
+
   next();
 });
 
-const sampleData = {
-  meta: {
-    data: {
-      title: "lesley",
-      description: "hello",
-    },
-  },
-};
-
-// app.use
-
-// get meta
-// #TODO: refactor this later
-// async function getMetaAndAbout(request) {
-//   let data = await connectToDB(request);
-//   let results = await data.query(
-//     Prismic.Predicates.any("document.type", [
-//       "meta",
-//       "about",
-//     ])
-//   );
-//   return results;
-// }
-// app.get("/test", (request, response) => {
-//   return getMetaAndAbout(request)
-//     .then(function (data) {
-//       console.log("HELLO");
-//       return data;
-//     })
-//     .then(function (prismicData) {
-//       const { results } = prismicData;
-//       const [meta, about] = results;
-
-//       response.render("pages/about", {
-//         meta,
-//         about,
-//       });
-//     })
-//     .catch((error) => {
-//       console.log("error", error);
-//     });
-// });
+app.get("/", async (request, response) => {
+  const api = await connectToDB(request);
+  const { results: collections } = await api.query(
+    Prismic.Predicates.at("document.type", "collection"),
+    {
+      fetchLinks: "product.image",
+    }
+  );
+  const meta = await api.getSingle("meta");
+  const preloader = await api.getSingle("preloader");
+  const home = await api.getSingle("label");
+  console.log(home.data.gallery);
+  response.render("pages/home", {
+    collections,
+    home,
+    meta,
+    preloader,
+  });
+});
 app.get("/about", async (request, response) => {
   const api = await connectToDB(request);
   const meta = await api.getSingle("meta");
   const about = await api.getSingle("about");
+  const preloader = await api.getSingle("preloader");
   let galleryImages = about.data.body[0].items;
-  response
-    .render("pages/about", {
-      meta,
-      about,
-      galleryImages,
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
+  response.render("pages/about", {
+    meta,
+    about,
+    galleryImages,
+    preloader,
+  });
 });
-app.get("/collections", (request, response) => {
-  response.render("pages/collections", sampleData);
+app.get("/collections", async (request, response) => {
+  const api = await connectToDB(request);
+  const meta = await api.getSingle("meta");
+  const home = await api.getSingle("label");
+  const preloader = await api.getSingle("preloader");
+  // fetchLinks allows you to get content from a linked document (e.g., if product has a linked collection type)
+  const { results: collections } = await api.query(
+    Prismic.Predicates.at("document.type", "collection"),
+    {
+      fetchLinks: "product.image",
+    }
+  );
+  response.render("pages/collections", {
+    collections,
+    home,
+    meta,
+    preloader,
+  });
 });
 
 app.get("/detail/:uid", async (request, response) => {
   const api = await connectToDB(request);
   const meta = await api.getSingle("meta");
+  const preloader = await api.getSingle("preloader");
   // fetchLinks allows you to get content from a linked document (e.g., if product has a linked collection type)
   const product = await api.getByUID(
     "product",
@@ -110,19 +103,11 @@ app.get("/detail/:uid", async (request, response) => {
       fetchLinks: "collection.title",
     }
   );
-
-  console.log("product", product);
-  response
-    .render("pages/detail", {
-      meta,
-      product,
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
+  response.render("pages/detail", {
+    meta,
+    product,
+    preloader,
+  });
 });
 
-app.get("/", (request, response) => {
-  response.render("pages/home", sampleData);
-});
 module.exports = app;
