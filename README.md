@@ -5,6 +5,8 @@ Make development more straightforward
 - Create UI
 - Create Prismic
 - Render everything in pug
+- Keep on editing
+- Routing
 
 # To start
 

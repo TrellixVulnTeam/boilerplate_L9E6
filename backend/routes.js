@@ -59,6 +59,7 @@ app.get("/", async (request, response) => {
   );
 
   const home = await api.getSingle("label");
+  console.log("home", home.data);
   const navigation = await api.getSingle("navigation");
   console.log(navigation);
   response.render("pages/home", {

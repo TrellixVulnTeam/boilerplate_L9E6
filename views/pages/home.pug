@@ -17,5 +17,5 @@ block content
                 each media in home.data.gallery
                     figure.home__gallery__media
                         img.home__gallery__media__image(alt=media.image.alt src=media.image.url)
-
-            a(href="/collections")=home.data.button
+    
+    a(href=Links(home.data.collection))=home.data.button
