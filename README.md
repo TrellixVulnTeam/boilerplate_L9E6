@@ -7,6 +7,14 @@ Make development more straightforward
 - Render everything in pug
 - Keep on editing
 - Routing
+- SCSS
+  - copy everything in scss
+    - remove all each
+    - select the key word, select all the key words
+    - (shift and command selects the words before)
+      - hold shift and command and left arrow key to delete the tags before
+    - select the first word, press command d then include brackets
+    - section the scss accordingly
 
 # To start
 

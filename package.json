@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "frontend:development": "webpack serve --progress --config webpack.config.development.js",
+    "frontend:development": "cross-env NODE_ENV=dev webpack serve --progress --config webpack.config.development.js",
     "frontend:build": "webpack --progress --config webpack.config.build.js",
     "backend:development": "nodemon app.js",
     "backend:build": "node app.js",
-    "start": "npm run backend:development npm run frontend:development"
+    "start": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\""
   },
   "keywords": [
     "boilerplate",
@@ -22,8 +22,10 @@
   "dependencies": {
     "@prismicio/client": "^5.1.0",
     "body-parser": "^1.19.0",
+    "concurrently": "^6.2.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
