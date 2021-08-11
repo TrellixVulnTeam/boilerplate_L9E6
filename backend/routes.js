@@ -10,8 +10,13 @@ const ACCESS_TOKEN = process.env.PRISMIC_ACCESS_TOKEN;
 function linkResolver(doc) {
   if (doc.type == "product") {
     return `/detail/${doc.slug}`;
+  } else if (doc.type == "about") {
+    return "/about";
+  } else if (doc.type == "collections") {
+    return "/collections";
+  } else {
+    return "/";
   }
-  return "/";
 }
 // Connecting to Database
 function connectToDB(req) {
@@ -36,43 +41,47 @@ app.use(function (req, res, next) {
   next();
 });
 
+const handleRequest = async (api) => {
+  const meta = await api.getSingle("meta");
+  const navigation = await api.getSingle("navigation");
+  const preloader = await api.getSingle("preloader");
+  return Promise.resolve({ meta, navigation, preloader });
+};
+
 app.get("/", async (request, response) => {
   const api = await connectToDB(request);
+  const defaults = await handleRequest(api);
   const { results: collections } = await api.query(
     Prismic.Predicates.at("document.type", "collection"),
     {
       fetchLinks: "product.image",
     }
   );
-  const meta = await api.getSingle("meta");
-  const preloader = await api.getSingle("preloader");
+
   const home = await api.getSingle("label");
-  console.log(home.data.gallery);
+  const navigation = await api.getSingle("navigation");
+  console.log(navigation);
   response.render("pages/home", {
     collections,
     home,
-    meta,
-    preloader,
+    ...defaults,
   });
 });
 app.get("/about", async (request, response) => {
   const api = await connectToDB(request);
-  const meta = await api.getSingle("meta");
   const about = await api.getSingle("about");
-  const preloader = await api.getSingle("preloader");
+  const defaults = await handleRequest(api);
   let galleryImages = about.data.body[0].items;
   response.render("pages/about", {
-    meta,
+    ...defaults,
     about,
     galleryImages,
-    preloader,
   });
 });
 app.get("/collections", async (request, response) => {
   const api = await connectToDB(request);
-  const meta = await api.getSingle("meta");
+  const defaults = await handleRequest(api);
   const home = await api.getSingle("label");
-  const preloader = await api.getSingle("preloader");
   // fetchLinks allows you to get content from a linked document (e.g., if product has a linked collection type)
   const { results: collections } = await api.query(
     Prismic.Predicates.at("document.type", "collection"),
@@ -82,16 +91,14 @@ app.get("/collections", async (request, response) => {
   );
   response.render("pages/collections", {
     collections,
+    ...defaults,
     home,
-    meta,
-    preloader,
   });
 });
 
 app.get("/detail/:uid", async (request, response) => {
   const api = await connectToDB(request);
-  const meta = await api.getSingle("meta");
-  const preloader = await api.getSingle("preloader");
+  const defaults = await handleRequest(api);
   // fetchLinks allows you to get content from a linked document (e.g., if product has a linked collection type)
   const product = await api.getByUID(
     "product",
@@ -101,9 +108,8 @@ app.get("/detail/:uid", async (request, response) => {
     }
   );
   response.render("pages/detail", {
-    meta,
+    ...defaults,
     product,
-    preloader,
   });
 });
 
