@@ -8,6 +8,7 @@ Make development more straightforward
 - Keep on editing
 - Routing
 - SCSS
+
   - Utils
   - copy everything in scss
     - remove all each
@@ -16,6 +17,8 @@ Make development more straightforward
       - hold shift and command and left arrow key to delete the tags before
     - select the first word, press command d then include brackets
     - section the scss accordingly
+
+- Look at design and create mixins
 
 # To start
 

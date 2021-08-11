@@ -6,9 +6,11 @@
 // override things
 @import "./utils/vendors";
 
-@import "./base/fonts";
 @import "./base/reset";
 @import "./base/template";
+
+@import "./sharedStyles/descriptions";
+@import "./sharedStyles/titles";
 
 @import "./partials/navigation";
 @import "./partials/preloader";
