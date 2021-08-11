@@ -6,16 +6,11 @@ var PrismicDOM = require("prismic-dom");
 const ENDPOINT = process.env.PRISMIC_ENDPOINT;
 const ACCESS_TOKEN = process.env.PRISMIC_ACCESS_TOKEN;
 
-// Link Resolver
+// Link Resolver - will pass you back for a js object
 function linkResolver(doc) {
-  // Define the url depending on the document type
-  //   if (doc.type === "page") {
-  //     return "/page/" + doc.uid;
-  //   } else if (doc.type === "blog_post") {
-  //     return "/blog/" + doc.uid;
-  //   }
-
-  // Default to homepage
+  if (doc.type == "product") {
+    return `/detail/${doc.slug}`;
+  }
   return "/";
 }
 // Connecting to Database
@@ -32,6 +27,8 @@ app.use(function (req, res, next) {
     endpoint: ENDPOINT,
     linkResolver: linkResolver,
   };
+
+  res.locals.Links = linkResolver;
   // add PrismicDOM in locals to access them in templates.
   // you can call PrismicDOM in pug files
   res.locals.PrismicDOM = PrismicDOM;
