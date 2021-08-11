@@ -131,7 +131,7 @@ module.exports = {
           // saves it into assets folder into public
           outputPath: "assets",
           name(file) {
-            return "[name].[ext]";
+            return "[hash].[ext]";
           },
         },
       },

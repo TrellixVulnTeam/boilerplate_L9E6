@@ -7,6 +7,7 @@ const ENDPOINT = process.env.PRISMIC_ENDPOINT;
 const ACCESS_TOKEN = process.env.PRISMIC_ACCESS_TOKEN;
 
 // Link Resolver - will pass you back for a js object
+// checks for type, manages routing for you
 function linkResolver(doc) {
   if (doc.type == "product") {
     return `/detail/${doc.slug}`;
