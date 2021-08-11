@@ -1,4 +1,18 @@
-// about page
+// put this at the top because other files can have access to them
+@import "./utils/variables";
+@import "./utils/functions";
+@import "./utils/responsive";
+@import "./utils/mixins";
+// override things
+@import "./utils/vendors";
+
+@import "./base/fonts";
+@import "./base/reset";
+@import "./base/template";
+
+@import "./partials/navigation";
+@import "./partials/preloader";
+
 @import "./pages/about/about";
 @import "./pages/about/content";
 @import "./pages/about/gallery";

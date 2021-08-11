@@ -1,0 +1,15 @@
+// Z-index - organize the z-index for you
+@function z($name) {
+  $z-index: () !default;
+  @if index($z-indexes, $name) {
+    @return (length($z-indexes) - index($z-indexes, $name)) +
+      1;
+  } @else {
+    @warn 'There is no "#{$name}" in this list, choose one of #{$z-indexes}';
+    @return null;
+  }
+}
+
+.modal {
+  z-index: z("modal");
+}

@@ -8,6 +8,7 @@ Make development more straightforward
 - Keep on editing
 - Routing
 - SCSS
+  - Utils
   - copy everything in scss
     - remove all each
     - select the key word, select all the key words
