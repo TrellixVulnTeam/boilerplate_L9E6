@@ -98,15 +98,20 @@ app.get("/about", async (request, response) => {
 app.get("/collections", (request, response) => {
   response.render("pages/collections", sampleData);
 });
+
 app.get("/detail/:uid", async (request, response) => {
   const api = await connectToDB(request);
   const meta = await api.getSingle("meta");
+  // fetchLinks allows you to get content from a linked document (e.g., if product has a linked collection type)
   const product = await api.getByUID(
     "product",
-    request.params.uid
+    request.params.uid,
+    {
+      fetchLinks: "collection.title",
+    }
   );
 
-  console.log(product);
+  console.log("product", product);
   response
     .render("pages/detail", {
       meta,

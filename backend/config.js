@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-
+// error handler for express
 const errorHandler = require("errorhandler");
 const path = require("path");
 // static handler
