@@ -60,13 +60,26 @@ app.get("/", async (request, response) => {
   );
 
   const home = await api.getSingle("label");
-  console.log("home", home.data);
+  //   console.log("home", home.data);
   const navigation = await api.getSingle("navigation");
-  console.log(navigation);
+  //   console.log(navigation);
   response.render("pages/home", {
     collections,
     home,
     ...defaults,
+  });
+});
+app.get("/test", async (request, response) => {
+  const api = await connectToDB(request);
+  const about = await api.getSingle("about");
+  const defaults = await handleRequest(api);
+  let galleryImages = about.data.body[0].items;
+  //   console.log(galleryImages);
+  //   console.log("about", about.data.body[2].primary.type);
+  response.render("pages/test", {
+    ...defaults,
+    about,
+    galleryImages,
   });
 });
 app.get("/about", async (request, response) => {
@@ -74,6 +87,8 @@ app.get("/about", async (request, response) => {
   const about = await api.getSingle("about");
   const defaults = await handleRequest(api);
   let galleryImages = about.data.body[0].items;
+  //   console.log(galleryImages);
+  //   console.log("about", about.data.body[2].primary.type);
   response.render("pages/about", {
     ...defaults,
     about,

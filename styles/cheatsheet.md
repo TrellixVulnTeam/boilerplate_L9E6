@@ -1,11 +1,16 @@
 ## Organization
 
+### Tools
+
+- css gradient
+- ## illustrator
+
 ### Thoughts
 
 - Is there a way to create mixins, thereby making development faster and more efficient?
 - E.g., organizing fonts -
 - E.g., organizing grids
-- 
+-
 
 ### Initial
 

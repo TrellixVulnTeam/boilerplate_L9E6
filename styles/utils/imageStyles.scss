@@ -4,11 +4,6 @@
   position: relative;
 }
 @mixin image-wrapper() {
-  align-items: center;
-  display: flex;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 @mixin image() {

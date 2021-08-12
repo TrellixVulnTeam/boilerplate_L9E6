@@ -10,6 +10,8 @@ img -
 
 ### Functions
 
+#### mixins
+
 #### If
 
 if section.slice_type == "gallery"

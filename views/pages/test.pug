@@ -1,0 +1,13 @@
+extends ../template.pug
+
+block variables
+    - var template = "test"
+    - var width = "2048.0000pt"
+    - var height = "2000"
+
+block content
+    .test
+        .test__wrapper
+            .map__wrapper
+                .map__wrapper__image
+                    include ../partials/map.pug

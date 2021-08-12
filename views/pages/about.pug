@@ -23,15 +23,17 @@ block content
                     h2.about__title=section.primary.text
 
                 if section.slice_type == "content"
-                    section.about__content
+                    //-checking if the type is left or right as well, and then changing the class
+                    section.about__content(class=`${section.primary.type === 'Left' ? 'about__content--left' : 'about__content--right'}`)
                         .about__content__wrapper 
-                            p.about__content__label=section.primary.label
+                            .about__content__box 
+                                p.about__content__label=section.primary.label
 
-                            //- How you can handle arrays here - need to utilize != before adding any DOM element integration
-                            .about__content__description!=PrismicDOM.RichText.asHtml(section.primary.description)
+                                //- How you can handle arrays here - need to utilize != before adding any DOM element integration
+                                .about__content__description!=PrismicDOM.RichText.asHtml(section.primary.description)
 
-                            figure.about__content__media
-                                img.about__content__media__image(alt=section.primary.image.alt src=section.primary.image.url)
+                                figure.about__content__media
+                                    img.about__content__media__image(alt=section.primary.image.alt src=section.primary.image.url)
 
                 if section.slice_type == "highlight"
                     section.about__highlight

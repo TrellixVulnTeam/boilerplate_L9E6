@@ -1,10 +1,31 @@
 .about__gallery {
   @include image-gallery($height: 58.6);
+  //   margin: 20rem 0;
+  //   &:first-child {
+  //     margin-top: 0;
+  //   }
+
+  //   &:last-child {
+  //     margin-bottom: 0;
+  //   }
 }
+// horizontal wrapper
 .about__gallery__wrapper {
-  @include image-wrapper;
+  // make everything same row
+  align-items: center;
+  // make it horizontal
+  display: flex;
+  // when using position absolute, should use with left top right bottom
+  position: absolute;
+  // top
+  top: 50%;
+  // can be used for animations
+  transform: translateY(-50%);
 }
 .about__gallery__media {
+  height: 43.7rem;
+  margin: 0.4rem;
+  width: 20rem;
 }
 .about__gallery__media__image {
 }
