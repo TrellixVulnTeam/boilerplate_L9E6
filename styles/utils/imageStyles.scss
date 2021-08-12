@@ -1,0 +1,15 @@
+@mixin image-gallery($height: null, $width: null) {
+  height: $height;
+  width: $width;
+  position: relative;
+}
+@mixin image-wrapper() {
+  align-items: center;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin image() {
+}

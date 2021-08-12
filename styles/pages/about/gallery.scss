@@ -1,6 +1,8 @@
 .about__gallery {
+  @include image-gallery($height: 58.6);
 }
 .about__gallery__wrapper {
+  @include image-wrapper;
 }
 .about__gallery__media {
 }

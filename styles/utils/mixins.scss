@@ -12,6 +12,24 @@
   justify-content: center;
 }
 
+// can be center, left, right, justify
+@mixin centerText($position: center) {
+  text-align: $position;
+}
+
+
+
+@mixin grid() {
+}
+
+@mixin rowCenter() {
+}
+
+@mixin rowLeft() {
+}
+@mixin rowRight() {
+}
+
 // Useful for
 @mixin ratio($height, $width) {
   font-size: 0;

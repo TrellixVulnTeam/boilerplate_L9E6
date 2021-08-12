@@ -15,7 +15,7 @@
   //   justify-items: center;
   display: flex;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(-90deg);
+  transform: rotate(-90deg);
   top: 50%;
 }
 .collections__titles__label {
@@ -53,15 +53,13 @@
 .collections__gallery__media__image {
 }
 .collections__content {
+  position: absolute;
 }
 .collections__article {
-  bottom: 8rem;
-  left: 8rem;
-  position: absolute;
+  @include absolute($bottom: 8rem, $left: 8rem);
 }
 .collections__article__title {
   @extend %title-60;
-
   line-height: 1;
   margin-bottom: 1.5rem;
   overflow: hidden;

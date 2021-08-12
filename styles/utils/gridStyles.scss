@@ -1,0 +1,35 @@
+@mixin absolute(
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+@mixin grid-block() {
+  display: grid;
+}
+
+@mixin grid-flex() {
+  display: flex;
+}
+
+@mixin grid-inline-block() {
+}
+
+@mixin grid-block-item() {
+}
+@mixin grid-flex-item() {
+}
+@mixin grid-inline-block-item() {
+}
+@mixin grid-block-center() {
+}
+@mixin grid-flex-center() {
+}
+@mixin grid-inline-block-center() {
+}
