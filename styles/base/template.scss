@@ -6,25 +6,25 @@
 }
 
 html {
-  @extend %cover;
+  //   @extend %cover;
 
   background: $color-contessa;
   color: $color-quarter-spanish-white;
   font-size: calc(100vw / 1920 * 10);
-  line-height: 1;
-  overflow: hidden;
-  position: fixed;
+  //   line-height: 1;
+  //   overflow: hidden;
+  //   position: fixed;
 
   @include media("<phone") {
     font-size: calc(100vw / 750 * 10);
   }
 }
 body {
-  @extend %cover;
+  //   @extend %cover;
   @extend %description-18;
 
   font-family: $fontOne;
-  position: fixed;
+  //   position: fixed;
 }
 
 a {
@@ -44,4 +44,8 @@ button {
   color: inherit;
   cursor: pointer;
   outline: none;
+}
+img {
+  vertical-align: middle;
+  width: 20rem;
 }

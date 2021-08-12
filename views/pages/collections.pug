@@ -10,6 +10,7 @@ block content
         .collections__wrapper
             .collections__titles 
                 each collection in collections
+                    p="each"
                     .collections__titles__label=home.data.collection
                     .collections__titles__title=collection.data.title
 
@@ -24,8 +25,9 @@ block content
 
             .collections__content
                 each collection in collections 
-                    article.collections__article=`${collection.data.title} ${home.data.collection}`
-                    p.collections__article__description=collection.data.description
+                    article.collections__article
+                        h2.collections__article__title=`${collection.data.title} ${home.data.collection}`
+                        p.collections__article__description=collection.data.description
 
 
 
