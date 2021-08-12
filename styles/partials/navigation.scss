@@ -1,4 +1,10 @@
 .navigation {
+  @extend %cover;
+
+  color: $color-quarter-spanish-white;
+  pointer-events: none;
+  position: fixed;
+  z-index: z("navigation");
 }
 .navigation__wrapper {
 }

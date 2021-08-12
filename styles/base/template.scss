@@ -1,13 +1,47 @@
-body {
-  font-size: 1.6rem;
-  font-weight: 300;
-
-  
-  @include media("<=phone") {
-    font-size: 20px;
-  }
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  user-select: none;
 }
 
-img {
-  width: 20%;
+html {
+  @extend %cover;
+
+  background: $color-contessa;
+  color: $color-quarter-spanish-white;
+  font-size: calc(100vw / 1920 * 10);
+  line-height: 1;
+  overflow: hidden;
+  position: fixed;
+
+  @include media("<phone") {
+    font-size: calc(100vw / 750 * 10);
+  }
+}
+body {
+  @extend %cover;
+  @extend %description-18;
+
+  font-family: $fontOne;
+  position: fixed;
+}
+
+a {
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+}
+canvas {
+  pointer-events: none;
+  position: relative;
+  z-index: z("canvas");
+}
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
 }
