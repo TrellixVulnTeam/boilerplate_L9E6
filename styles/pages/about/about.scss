@@ -3,10 +3,17 @@
   color: $color-bright-gray;
 }
 .about__wrapper {
+  padding-top: 10rem;
 }
 
 .about__title {
-  @include font($font-size: 10rem);
+  @include font($font-size: 11rem);
   @include centerText($position: center);
-  max-width: 107.4rem;
+  margin: auto;
+  max-width: 140rem;
+  text-align: center;
+
+  @include media("<phone") {
+    max-width: 67.7rem;
+  }
 }

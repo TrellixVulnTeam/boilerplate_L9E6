@@ -11,11 +11,12 @@ block content
         .home__wrapper
             .collections__titles 
                 each collection in collections
-                    .collections__titles__label=home.data.collection
-                    .collections__titles__title=collection.data.title
+                    .home__titles__label=home.data.collection
+                    .home__titles__title
+                        .home__titles__title__text=collection.data.title
             .home__gallery
                 each media in home.data.gallery
                     figure.home__gallery__media
                         img.home__gallery__media__image(alt=media.image.alt src=media.image.url)
     
-    a.home__link(href=Links(home.data.collection))=home.data.button
+            a.home__link(href=Links(home.data.collection))=home.data.button

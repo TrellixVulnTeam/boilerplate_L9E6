@@ -21,6 +21,23 @@
 - Think about what is shared (put in shared styles)
 -
 
+## Breakpoints
+
+below phone...
+
+```
+@include("<phone") {
+    flex-direction: column;
+    margin: auto;
+    width: 66.1rem;
+}
+and in fonts 
+@include("<phone") {
+    font-size: 3rem; 
+}
+```
+
+
 ## Commands
 
 ```

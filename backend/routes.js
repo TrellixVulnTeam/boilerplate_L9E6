@@ -46,7 +46,20 @@ const handleRequest = async (api) => {
   const meta = await api.getSingle("meta");
   const navigation = await api.getSingle("navigation");
   const preloader = await api.getSingle("preloader");
-  return Promise.resolve({ meta, navigation, preloader });
+
+  const { results: productsData } = await api.query(
+    Prismic.Predicates.at("document.type", "product"),
+    {
+      fetchLinks: "collection.title",
+      pageSize: 100,
+    }
+  );
+  return Promise.resolve({
+    meta,
+    navigation,
+    preloader,
+    productsData,
+  });
 };
 
 app.get("/", async (request, response) => {
@@ -69,14 +82,15 @@ app.get("/", async (request, response) => {
     ...defaults,
   });
 });
-app.get("/test", async (request, response) => {
+app.get("/map", async (request, response) => {
   const api = await connectToDB(request);
   const about = await api.getSingle("about");
   const defaults = await handleRequest(api);
   let galleryImages = about.data.body[0].items;
   //   console.log(galleryImages);
   //   console.log("about", about.data.body[2].primary.type);
-  response.render("pages/test", {
+
+  response.render("pages/map", {
     ...defaults,
     about,
     galleryImages,
@@ -99,6 +113,14 @@ app.get("/collections", async (request, response) => {
   const api = await connectToDB(request);
   const defaults = await handleRequest(api);
   const home = await api.getSingle("label");
+  const product = await api.getByUID(
+    "product",
+    "silver-necklace",
+    {
+      fetchLinks: "collection.title",
+    }
+  );
+
   // fetchLinks allows you to get content from a linked document (e.g., if product has a linked collection type)
   const { results: collections } = await api.query(
     Prismic.Predicates.at("document.type", "collection"),
@@ -108,6 +130,7 @@ app.get("/collections", async (request, response) => {
   );
   response.render("pages/collections", {
     collections,
+    product,
     ...defaults,
     home,
   });

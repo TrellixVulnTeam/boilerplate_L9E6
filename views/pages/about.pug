@@ -8,7 +8,7 @@ block body
 
 
 block content
-    
+
     .about 
         .about__wrapper
             section.about__gallery
@@ -32,23 +32,25 @@ block content
                                 //- How you can handle arrays here - need to utilize != before adding any DOM element integration
                                 .about__content__description!=PrismicDOM.RichText.asHtml(section.primary.description)
 
-                                figure.about__content__media
-                                    img.about__content__media__image(alt=section.primary.image.alt src=section.primary.image.url)
+                            figure.about__content__media
+                                img.about__content__media__image(alt=section.primary.image.alt src=section.primary.image.url)
 
                 if section.slice_type == "highlight"
                     section.about__highlight
                         .about__highlight__wrapper
+                        
+
                             if section.primary.highlight_label
                                 p.about__highlight__label=section.primary.highlight_label
                             h3.about__highlight__title=section.primary.highlight_title
-
+                        .about__highlight__medias
                             each item in section.items
                                 figure.about__highlight__media
-                                img.about__highlight__media__image(alt=item.media.alt src=item.media.url)
+                                    img.about__highlight__media__image(alt=item.media.alt src=item.media.url)
 
                 if section.slice_type == "gallery"
                     section.about__gallery
-                    .about__gallery__wrapper 
-                        each photo in section.items
-                            figure.about__gallery__media
-                                img.about__gallery__media__image(alt=photo.image.alt src=photo.image.url)
+                        .about__gallery__wrapper 
+                            each photo in section.items
+                                figure.about__gallery__media
+                                    img.about__gallery__media__image(alt=photo.image.alt src=photo.image.url)
